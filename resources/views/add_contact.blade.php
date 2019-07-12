@@ -1,19 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container contact-container">
    <h1>Contact details 
       <small>with preview</small>
+      <a href="/contact">All Contacts</a>
    </h1>
-   <form >
+
+   @include('includes.notify')
+
+   <form action="{{route('contact.store')}}" method="post" id="addContact" name="addContact" role="form" enctype="multipart/form-data">
+    @csrf
    <div class="avatar-upload">
       <div class="avatar-edit">
-         <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+         <input type='file' id="imageUpload" name="file" accept=".png, .jpg, .jpeg" />
+         <input type="hidden" name="edit_img_path" value="" id="edit_img_path">
          <label for="imageUpload" class="glyphicon glyphicon-pencil"></label>
       </div>
-      <div class="avatar-preview">
-         <div id="imagePreview" style="background-image: url({{ URL::to('/img/avatar.png') }});">
-         </div>
+      <div class="">
+         <img src="{{ URL::to('/img/avatar.png') }}" name="img" id="img-tag" width="200px" style="display: block" />
       </div>
    </div>
 
@@ -21,7 +26,7 @@
    <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="col-md-6 col-sm-6 col-xs-12">
          <div class="form-group">
-            <input type="text" class="form-control input-lg" id="fname" name="fname" placeholder="First Name">
+            <input type="text" class="form-control input-lg" id="fname" name="fname" placeholder="First Name" required="">
          </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -40,7 +45,7 @@
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
          <div class="form-group">
-            <input type="text" class="form-control input-lg" id="email" name="email" placeholder="Email">
+            <input type="email" class="form-control input-lg" id="email" name="email" placeholder="Email">
          </div>
       </div>
    </div>
@@ -49,7 +54,7 @@
    <div class="col-md-12">
       <div class="col-md-6 col-sm-6 col-xs-12">
          <div class="form-group">
-            <input type="text" class="form-control input-lg" id="mobile" name="mobile" placeholder="Mobile">
+            <input type="text" class="form-control input-lg" id="mobile" name="mobile" placeholder="Mobile" required="" minlength="10" maxlength="15"> 
          </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -79,42 +84,31 @@
     </div>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <button type="button" class="btn btn-success">Save</button>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <button type="button" data-toggle="modal" data-target="#deleteContact" class="btn btn-danger">Delete</button>
-        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>        
     </div>
 
-
-   <div class="modal fade" id="deleteContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-         </div>
-         <div class="modal-body">Select "Yes" below if you want to delete this record from database.</div>
-         <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <form action="" method="post">
-               @csrf
-               @method('DELETE')
-               <button type="submit" class="btn btn-danger" >Yes</a>
-            </form>
-         </div>
-      </div>
-    </div>
-    </div>
   </form>
     
 </div>
 @endsection
 @section('scripts')
   <script>
-
+    $(document).ready(function(){
+        $("#imageUpload").change(function(){
+            readURL(this);
+        });
+    });
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function (e) {
+              $('#img-tag').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+    }
   </script>
 @endsection

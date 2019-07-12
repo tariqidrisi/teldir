@@ -20,7 +20,7 @@ class CreateContactsTable extends Migration
             $table->string('mname', 255);
             $table->string('lname', 255);
             $table->string('email', 320);
-            $table->integer('mobile');
+            $table->string('mobile', 15);
             $table->string('landline');
             $table->text('notes');
             $table->enum('type', ['private', 'public']);

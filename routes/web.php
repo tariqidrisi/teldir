@@ -18,3 +18,9 @@
 Route::get('/', 'ContactController@index');
 
 Route::resource('/contact', 'ContactController');
+
+// search contacts named route
+Route::post('/search', 'ContactController@search')->name('search');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

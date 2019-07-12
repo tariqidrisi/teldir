@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mohammed Tariq">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Contacts</title>
 
     <!-- Custom styles for this template -->
@@ -17,9 +18,11 @@
 
 <body>
   	@include('includes.header')
-    <div class="container">    
-      @yield('content')
-    </div>
+    
+    <!-- content start -->
+    @yield('content')
+    <!-- content end -->
+    
     @include('includes.footer')
     @yield('scripts')
 </body>
