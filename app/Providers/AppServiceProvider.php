@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -24,5 +26,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Schema::defaultStringLength(191);
+
+        // DB::listen(function ($query) {
+
+        //     $sql = $query->sql;
+        //     foreach ($query->bindings as $value) {
+
+        //         $sql = preg_replace('/\?/', "'".$value."'", $sql, 1);
+        //     }
+
+        //     \Log::info($sql. ' - Time: ' . $query->time);
+        //     echo $sql. '<br/>Time: ' . $query->time . '<br/><br/>';
+
+        // });
     }
 }
