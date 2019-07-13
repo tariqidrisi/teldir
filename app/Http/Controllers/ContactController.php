@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Auth;
+use Charts;
 use Redirect;
 use App\Contact;
+use App\ContactViewCounter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +26,11 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $data['all'] = Contact::orderBy('fname')->get();
+        // get logged in user id
+        $id = Auth::user()->id;
+        // dd($id);
+
+        $data['all'] = Contact::Where('user_id', $id)->orWhere('type', 'public')->orderBy('fname')->get();
         $data['auto_search'] = $this->makeAutocompleteSearch($data['all']);
         
         return view("contacts", compact("data"));
@@ -105,8 +118,23 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
+        // add view count to table
+        $viewCount = new ContactViewCounter;
+        $viewCount->contact_id = $id;
+        $viewCount->save();
+
         $data = Contact::where('id', $id)->first();
-        return view("edit_contact")->with(compact('data'));
+        $ContactViewCounter = ContactViewCounter::where('contact_id', $id)->where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+                    ->get();
+
+        $chart = Charts::database($ContactViewCounter, 'bar', 'highcharts')
+                  ->title("Monthly views")
+                  ->elementLabel("Total view count")
+                  ->dimensions(1000, 500)
+                  ->responsive(true)
+                  ->groupByMonth(date('Y'), true);
+ 
+        return view("edit_contact")->with(compact('data', 'chart'));
     }
 
     /**
@@ -215,8 +243,15 @@ class ContactController extends Controller
 
         // text to search for in table
         $text = request('text');
+        $id = Auth::user()->id;
 
-        $data['all'] = Contact::Where('fname', 'like', $text . '%')->orderBy('fname')->get();
+        if(!empty($text)) {
+
+            $data['all'] = Contact::Where('user_id', $id)->Where('fname', 'like', $text . '%')->orderBy('fname')->get();
+        } else {
+            $data['all'] = Contact::Where('user_id', $id)->orWhere('type', 'public')->orderBy('fname')->get();
+
+        }
         $data['auto_search'] = $this->makeAutocompleteSearch($data['all']);
         
         return view("partials.list", compact("data"));

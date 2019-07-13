@@ -22,9 +22,13 @@ input[type=checkbox], input[type=radio] {
 .justify-content-center {
       margin-top: 25px;
 }
+.register, .logout {
+  float: right!important;
+}
 @media (min-width: 1200px) {
   .contact-container {
       width: 500px!important;
+          margin: auto!important;
   }
   th {
     font-size: 15px;

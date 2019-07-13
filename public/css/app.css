@@ -10679,9 +10679,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -10956,9 +10962,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -11233,9 +11245,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -11510,9 +11528,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -11787,9 +11811,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -12064,9 +12094,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -12341,9 +12377,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {
@@ -12618,9 +12660,15 @@ input[type=radio] {
   margin-top: 25px;
 }
 
+.register,
+.logout {
+  float: right !important;
+}
+
 @media (min-width: 1200px) {
   .contact-container {
     width: 500px !important;
+    margin: auto !important;
   }
 
   th {

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="col-md-12">
-    <div class="col-md-6">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-6 col-sm-12 col-xs-12">
      <h1>Contact details 
         <small>with preview</small>
         <a href="/contact">All Contacts</a>
@@ -10,7 +10,7 @@
 
      @include('includes.notify')
 
-     <form action="{{route('contact.update', $data->id)}}" method="post" id="addContact" name="addContact" role="form" enctype="multipart/form-data">
+    <form action="{{route('contact.update', $data->id)}}" method="post" id="addContact" name="addContact" role="form" enctype="multipart/form-data">
       @method('PATCH')
       @csrf    
      <div class="avatar-upload">
@@ -21,7 +21,14 @@
             <label for="imageUpload" class="glyphicon glyphicon-pencil"></label>
         </div>
         <div class="">
-           <img src="{{ Storage::url($data->photo) }}" name="img" id="img-tag" width="200px" style="display: block" />
+           <?php 
+              if(empty($data->photo)) {
+                $path = URL::to('/img/avatar.png');
+              } else {
+                $path = Storage::url($data->photo);                
+              } 
+           ?> 
+           <img src="{{ $path }}" name="img" id="img-tag" width="200px" style="display: block" />
         </div>
      </div>
 
@@ -106,9 +113,9 @@
           <div class="col-md-6 col-sm-6 col-xs-6">
               <button type="button" data-toggle="modal" data-target="#deleteContact" class="btn btn-danger">Delete</button>
           </div>
-      </form>
-    </div>
-  
+      </div>
+    </form>
+    
    <!-- delete confirmation modal --> 
    <div class="modal fade" id="deleteContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -130,18 +137,17 @@
            </div>
         </div>
       </div>
-
-
+    </div>
 
     </div>
 
-    <div class="col-md-6">
-      
+    <!-- bar graph of view count -->
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      {!! $chart->html() !!}      
     </div>
 
   </div>
-    
-</div>
+  
 @endsection
 @section('scripts')
   <script>
@@ -161,4 +167,7 @@
       }
     }
   </script>
+
+  {!! Charts::scripts() !!}
+  {!! $chart->script() !!}
 @endsection
