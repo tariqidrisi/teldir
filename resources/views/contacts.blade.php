@@ -19,6 +19,17 @@
           <div class="autocomplete" >
             <div class="form-group">
               <input type="text" name="search" class="form-control search-txt" id="search" placeholder="Search">
+              <select name="sort_name" id="sort_name" >
+                <option>Sort by name</option>
+                <option value="ASC">ASC</option>
+                <option value="DESC">DESC</option>
+              </select>
+
+              <select name="sort_date" id="sort_date" class="sort_date">
+                <option>Sort by date</option>
+                <option value="ASC">ASC</option>
+                <option value="DESC">DESC</option>
+              </select>
             </div>
           </div>
         </th>

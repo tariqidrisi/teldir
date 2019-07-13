@@ -10680,7 +10680,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -10963,7 +10964,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -11246,7 +11248,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -11529,7 +11532,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -11812,7 +11816,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -12095,7 +12100,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -12378,7 +12384,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 
@@ -12661,7 +12668,8 @@ input[type=radio] {
 }
 
 .register,
-.logout {
+.logout,
+.sort_date {
   float: right !important;
 }
 

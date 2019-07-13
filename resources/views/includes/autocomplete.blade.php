@@ -14,6 +14,36 @@
                 $("#searchResult").html(data);
             });
         });
+
+        $("#sort_name").change(function(){
+
+            var order = $(this).val();
+            var col = "fname";
+            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.post("{{route('sorting')}}", {order:order, col:col}, function(data){
+                $("#searchResult").html(data);
+            });
+        });
+
+        $("#sort_date").change(function(){
+
+            var order = $(this).val();
+            var col = "created_at";
+            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.post("{{route('sorting')}}", {order:order, col:col}, function(data){
+                $("#searchResult").html(data);
+            });
+        });
     });
 
 

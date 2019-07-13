@@ -266,4 +266,16 @@ class ContactController extends Controller
             return false;
         }
     }
+
+    public function sorting(Request $request) {
+        $order = request('order');
+        $col = request('col');
+        $id = Auth::user()->id;
+
+        $data['all'] = Contact::Where('user_id', $id)->orWhere('type', 'public')->orderBy($col, $order)->get();
+    
+        $data['auto_search'] = $this->makeAutocompleteSearch($data['all']);
+
+        return view("partials.list", compact("data"));
+    }
 }

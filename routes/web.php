@@ -22,10 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
    });
 });
 
+// resource route
 Route::resource('/contact', 'ContactController');
 
-// search contacts named route
+// named routes
 Route::post('/search', 'ContactController@search')->name('search');
+Route::post('/sorting', 'ContactController@sorting')->name('sorting');
 
 // auth routes
 Route::get('/home', 'HomeController@index')->name('home');
